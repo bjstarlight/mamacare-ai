@@ -168,7 +168,9 @@ export function useBotChain() {
       setLatestTransactionHash(stats.latestTransactionHash);
     });
 
-    return unsubscribe;
+   return () => {
+  unsubscribe();
+};
   }, []);
 
   return {

@@ -128,7 +128,7 @@ export function PregnancyModule({
           weekAdvice={weekAdvice}
         />
       </ModuleSection>
-      <PregnancyTimeline pregnancyWeek={pregnancyWeek} />
+      <PregnancyTimeline />
       <AIMaternalRiskPrediction />
       <div className="grid gap-5 lg:grid-cols-2">
         <MedicationReminder />

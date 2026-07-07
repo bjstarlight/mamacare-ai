@@ -212,10 +212,12 @@ export function syncMedicationSupplementAgent(
   const normalizedLogs = autoMarkMissedDoses(todayDoses, logs, now, persist);
   const statusByOccurrence = new Map(normalizedLogs.map((entry) => [entry.occurrenceId, entry.status]));
 
-  const enriched = todayDoses.map((dose) => ({
-    ...dose,
-    status: statusByOccurrence.get(dose.occurrenceId) ?? "upcoming",
-  }));
+ const enriched: MedicationDoseOccurrence[] = todayDoses.map((dose) => ({
+  ...dose,
+  status:
+    (statusByOccurrence.get(dose.occurrenceId) ?? "upcoming") as
+      MedicationDoseOccurrence["status"],
+}));
 
   const missedDoses = enriched.filter((dose) => dose.status === "missed");
   const upcomingDoses = enriched.filter((dose) => dose.status === "upcoming");
