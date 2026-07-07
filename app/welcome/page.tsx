@@ -177,7 +177,7 @@ export default function WelcomePage() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-[#2B2118] text-[#FBF6F1]">
+    <div className="flex min-h-screen flex-col bg-[#1b150f] text-[#FBF6F1] rounded-[45px]">
       {step === "splash" && (
         <div className="page-enter flex flex-1 flex-col items-center justify-center px-6 text-center">
           <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-[#6B2545] text-3xl shadow-lg">
@@ -278,7 +278,7 @@ export default function WelcomePage() {
               : "Log in to continue where you left off."}
           </p>
 
-          <div className="mt-6 space-y-4">
+          <div className="mt-5 space-y-4">
             {authMode === "signup" && (
               <div>
                 <label className="text-xs font-medium uppercase tracking-wide text-white/50">
