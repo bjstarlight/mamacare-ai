@@ -9,7 +9,7 @@ import {
   type AppSection,
   type PrimarySection,
 } from "../config/productFlow";
-
+import Image from "next/image";
 type AppShellProps = {
   children: React.ReactNode;
   activeSection: AppSection;
@@ -39,13 +39,29 @@ export default function AppShell({ children, activeSection, onNavigate }: AppShe
             <button className="rounded-full border border-[#EFE4DC] bg-white p-2 lg:hidden" onClick={() => setMobileOpen((value) => !value)}>
               {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#B5533F]">MamaCare AI</p>
-              <h1 className="text-lg font-semibold text-[#2B2118]">{currentLabel}</h1>
+           <div className="flex items-center gap-3">
             </div>
-          </div>
+  <Image
+    src="/logo.png"
+    alt="MamaCare AI"
+    width={46}
+    height={46}
+    priority
+    className="rounded-xl"
+  />
+
+  <div>
+    <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#B5533F]">
+      MamaCare AI
+    </p>
+
+    <h1 className="text-lg font-semibold text-[#2B2118]">
+      {currentLabel}
+    </h1>
+  </div>
+</div>
           <div className="flex items-center gap-2">
-            <div className="hidden items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm font-medium text-emerald-700 sm:flex">
+            <div className="hidden items-center gap-2 rounded-full borderborder-emerald-200 bg-emerald-50 text-emerald-700 sm:flex">
               <ShieldCheck className="h-4 w-4" />
               BOT Chain Verified
             </div>
@@ -57,7 +73,7 @@ export default function AppShell({ children, activeSection, onNavigate }: AppShe
       </header>
 
       <div className="mx-auto flex max-w-7xl gap-6 px-4 py-4 sm:px-6 lg:px-8">
-        <aside className="hidden w-64 shrink-0 rounded-[1.5rem] border border-[#EFE4DC] bg-white p-4 shadow-sm lg:block">
+        <aside className="hidden w-64 shrink-0 rounded-3xl border border-[#EFE4DC] bg-white p-4 shadow-sm lg:block">
           <div className="space-y-1">
             {navItems.map((item) => {
                   const Icon = item.icon;
@@ -83,7 +99,7 @@ export default function AppShell({ children, activeSection, onNavigate }: AppShe
 
         {mobileOpen ? (
           <div className="fixed inset-0 z-30 bg-[#2B2118]/70 p-4 lg:hidden">
-            <div className="rounded-[1.5rem] border border-[#EFE4DC] bg-white p-4 shadow-xl">
+            <div className="rounded-3xl border border-[#EFE4DC] bg-white p-4 shadow-xl">
               <div className="flex items-center justify-between">
                 <p className="text-sm font-semibold text-[#2B2118]">Navigation</p>
                 <button onClick={() => setMobileOpen(false)} className="rounded-full border border-[#EFE4DC] p-2">
