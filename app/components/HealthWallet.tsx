@@ -36,15 +36,15 @@ export default function HealthWallet() {
   const pregnancyWeek = useMemo(() => readString(STORAGE_KEYS.pregnancyWeek), []);
 
   return (
-    <div className="mx-auto max-w-2xl rounded-3xl bg-linear-to-br from-[#35406B] to-[#6B2545] p-6 text-white shadow-lg">
+    <div className="mx-auto max-w-2xl rounded-3xl bg-linear-to-br from-[#35406B] to-[#6B2545] p-6 text-sm text-white shadow-lg">
       <div className="flex items-center gap-2">
         <ShieldCheck className="h-6 w-6" />
-        <h2 className="font-serif text-2xl font-semibold">Health Wallet</h2>
+        <h2 className="font-serif text-lg font-semibold">Health Wallet</h2>
       </div>
 
-      <p className="mt-1 text-sm text-white/70">Secure medical identity powered by BOT Chain</p>
+      <p className="mt-1 text-xs text-white/70">Secure medical identity powered by BOT Chain</p>
 
-      <div className="mt-6 grid gap-4 md:grid-cols-2">
+      <div className="mt-6 grid gap-2 md:grid-cols-2">
         <div className="rounded-2xl bg-white/10 p-4">
           <p className="text-xs uppercase tracking-wide text-white/60">Protected Milestones</p>
           <p className="mt-1 text-3xl font-bold">{recordCount}</p>
