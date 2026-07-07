@@ -1,0 +1,42 @@
+{
+  "_format": "hh3-sol-build-info-1",
+  "id": "solc-0_8_28-ffe3bf340c012da4eae8cdf7a2f3e23d1e64fdb2",
+  "solcVersion": "0.8.28",
+  "solcLongVersion": "0.8.28+commit.7893614a",
+  "compilerType": "solc",
+  "userSourceNameMap": {
+    "contracts/MedicalRecord.sol": "project/contracts/MedicalRecord.sol"
+  },
+  "input": {
+    "language": "Solidity",
+    "settings": {
+      "evmVersion": "cancun",
+      "outputSelection": {
+        "*": {
+          "": [
+            "ast"
+          ],
+          "*": [
+            "abi",
+            "evm.bytecode.linkReferences",
+            "evm.bytecode.object",
+            "evm.bytecode.opcodes",
+            "evm.bytecode.sourceMap",
+            "evm.deployedBytecode.immutableReferences",
+            "evm.deployedBytecode.linkReferences",
+            "evm.deployedBytecode.object",
+            "evm.deployedBytecode.opcodes",
+            "evm.deployedBytecode.sourceMap",
+            "evm.methodIdentifiers"
+          ]
+        }
+      },
+      "remappings": []
+    },
+    "sources": {
+      "project/contracts/MedicalRecord.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.28;\r\n\r\ncontract MedicalRecordV2 {\r\n\r\n    struct Record {\r\n        string recordHash;\r\n        string category;\r\n        uint256 timestamp;\r\n        address owner;\r\n    }\r\n\r\n    Record[] public records;\r\n\r\n    // Fast lookup for verification\r\n    mapping(string => bool) private verifiedHashes;\r\n\r\n    // Get record ID from hash\r\n    mapping(string => uint256) private hashToRecordId;\r\n\r\n    event RecordAdded(\r\n        uint256 indexed id,\r\n        string recordHash,\r\n        string category,\r\n        address indexed owner,\r\n        uint256 timestamp\r\n    );\r\n\r\n    function addRecord(\r\n        string memory recordHash,\r\n        string memory category\r\n    ) public {\r\n\r\n        require(\r\n            !verifiedHashes[recordHash],\r\n            \"Record already exists\"\r\n        );\r\n\r\n        records.push(\r\n            Record({\r\n                recordHash: recordHash,\r\n                category: category,\r\n                timestamp: block.timestamp,\r\n                owner: msg.sender\r\n            })\r\n        );\r\n\r\n        uint256 recordId = records.length - 1;\r\n\r\n        verifiedHashes[recordHash] = true;\r\n        hashToRecordId[recordHash] = recordId;\r\n\r\n        emit RecordAdded(\r\n            recordId,\r\n            recordHash,\r\n            category,\r\n            msg.sender,\r\n            block.timestamp\r\n        );\r\n    }\r\n\r\n    function getRecord(\r\n        uint256 id\r\n    )\r\n        public\r\n        view\r\n        returns (\r\n            string memory,\r\n            string memory,\r\n            uint256,\r\n            address\r\n        )\r\n    {\r\n        Record memory r = records[id];\r\n\r\n        return (\r\n            r.recordHash,\r\n            r.category,\r\n            r.timestamp,\r\n            r.owner\r\n        );\r\n    }\r\n\r\n    // Verify if a record exists\r\n    function verifyRecord(\r\n        string memory recordHash\r\n    )\r\n        public\r\n        view\r\n        returns (bool)\r\n    {\r\n        return verifiedHashes[recordHash];\r\n    }\r\n\r\n    // Get record ID from hash\r\n    function getRecordId(\r\n        string memory recordHash\r\n    )\r\n        public\r\n        view\r\n        returns (uint256)\r\n    {\r\n        require(\r\n            verifiedHashes[recordHash],\r\n            \"Record not found\"\r\n        );\r\n\r\n        return hashToRecordId[recordHash];\r\n    }\r\n\r\n    function totalRecords()\r\n        public\r\n        view\r\n        returns (uint256)\r\n    {\r\n        return records.length;\r\n    }\r\n}"
+      }
+    }
+  }
+}

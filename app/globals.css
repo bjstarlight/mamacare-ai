@@ -1,8 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --mamacare-bg: #f7f0e8;
+  --mamacare-surface: #fff9f4;
+  --mamacare-ink: #2b2118;
+  --mamacare-accent: #6b2545;
+  --mamacare-coral: #e2725b;
+  --background: var(--mamacare-bg);
+  --foreground: var(--mamacare-ink);
 }
 
 @theme inline {
@@ -12,15 +17,37 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+body {
+  background: var(--mamacare-bg);
+  color: var(--mamacare-ink);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.page-enter {
+  animation: pageEnter 0.35s ease-out both;
+}
+
+.card-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(43, 33, 24, 0.12);
+}
+
+.card-lift:active {
+  transform: scale(0.98);
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
